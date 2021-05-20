@@ -9,6 +9,8 @@ Dogca and yasemin
 */
 var debug = false;
 
+var mouse_moved = false;
+
 let imgOpeningPlay, imgOpeningScreen, imgStory;
 let imgLvl1_Bkg, imgLvl1_Cake, imgLvl1_ClueSign;
 let imgLvl1_MapIcon, imgLvl1_Map_Popup, imgLvl1_map_exitButon, imgLvl1_map_lvlCircle;
@@ -484,7 +486,7 @@ function p5xgT_setPosition(obj) {
   if (keyDown('a')) obj.tx-=keyStep;
   if (keyDown('d')) obj.tx+=keyStep;
 
-  if(obj.tx<obj.position.x-2) {
+/*  if(obj.tx<obj.position.x-2) {
       obj.changeAnimation('fly');
       obj.facing = "E";
       obj.velocity.x = -walkingSpeed;
@@ -495,13 +497,47 @@ function p5xgT_setPosition(obj) {
       obj.velocity.x = +walkingSpeed;
   } else {
     obj.velocity.x = 0;
-  }
+  }*/
 
 
-  if(debug) text("x:" + (obj.position.x - canvas.cx) + " y:" + (-canvas.cy + obj.position.y) + "tx:" + obj.position.x, 20, 20);
+  if(mouseX < obj.position.x - 10) {
+      obj.changeAnimation('fly');
+      // flip horizontally
+      obj.mirrorX(-1);
+      // move left
+      obj.velocity.x = -2;
+    }
+    else if(mouseX > obj.position.x + 10) {
+    obj.changeAnimation('fly');
+      // flip horizontally
+      obj.mirrorX(1);
+      // move right
+    obj.velocity.x = 2;
+    }
+
+    if(mouseY < obj.position.y - 10) {
+        obj.changeAnimation('fly');
+        // flip horizontally
+        obj.mirrorX(-1);
+        // move left
+        obj.velocity.y = -2;
+      }
+      else if(mouseY > obj.position.y + 10) {
+      obj.changeAnimation('fly');
+        // flip horizontally
+        obj.mirrorX(1);
+        // move right
+      obj.velocity.y = 2;
+    }
+
+
+/*  if(debug) text("x:" + (obj.position.x - canvas.cx) + " y:" + (-canvas.cy + obj.position.y) + "tx:" + obj.position.x, 20, 20);
   if(obj.position.x < 5) {obj.tx=5; obj.position.x=5; obj.velocity.x = 0;}
   if(obj.position.x > canvas.w-5) {obj.tx=canvas.w-5; obj.position.x=canvas.w-5; obj.velocity.x = 0;}
-  p5xgT_roundPos(oso);
+  p5xgT_roundPos(oso);*/
+
+
+
 }
 
 
